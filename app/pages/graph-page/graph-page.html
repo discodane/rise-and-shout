@@ -10,6 +10,35 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <div class='gen-info'>
+    <div class='game-status'>
+      <span class='info in-game'>
+        1st Quarter
+      </span>
+      <span class='info'>
+        21-0
+      </span>
+    </div>
+    <div class='group'>
+      <span class='info'>Nate</span>
+    </div>
+  </div>
+  <div>
+    <ion-card>
+      <ion-card-header>
+        <span>35% approval</span>
+        <span>BYU v. Utah</span>
+        <span>3 votes</span>
+      </ion-card-header>
+      <ion-card-content>
+        <span> putting something in here </span>
+        <base-chart class="chart"
+            [datasets]="lineChartData"
+            [options]="lineChartOptions"
+            [colors]="lineChartColours"></base-chart>
+      </ion-card-content>
+    </ion-card>
+  </div>
   <div class='vote-button-container'>
     <button class='voter'>
       <span>Cheer</span>

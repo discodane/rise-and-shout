@@ -7,6 +7,47 @@ ion-navbar{
 	background-color: #6d85a0;
 }
 
-.voter {
-	width: 40%;
+.vote-button-container{
+	text-align: center;
+	margin: 9px 9px 9px 9px;
+	.voter {
+		width: 48%;
+	}
+}
+
+.gen-info {
+	margin: 12px 12px;
+}
+
+.game-status {
+	display: inline-block;
+	span {
+		display: block;
+	}
+}
+
+.group {
+	display: inline-block;
+	float: right;
+	margin-top: 2em;
+}
+
+.info {
+	color: #ffffff;
+	font-size: x-large;
+	font-weight: bold;
+}
+
+.in-game {
+	color: #87fa70;
+}
+
+ion-card {
+	border-radius: 25px;
+}
+
+.chart {
+	display: block;
+	width: 100%;
+	background: "#d8dee7",
 }
