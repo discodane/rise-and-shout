@@ -4,73 +4,61 @@ import { AlertController, App, ItemSliding, List, ModalController, NavController
 import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass } from "@angular/common";
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 
+var ctx = document.getElementById("myChart");
+	var myChart = new Chart(ctx, {
+    	type: 'bar',
+    	data: {
+        	labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        	datasets: [{
+            	label: '# of Votes',
+            	data: [12, 19, 3, 5, 2, 3],
+            	backgroundColor: [
+                	'rgba(255, 99, 132, 0.2)',
+                	'rgba(54, 162, 235, 0.2)',
+                	'rgba(255, 206, 86, 0.2)',
+                	'rgba(75, 192, 192, 0.2)',
+                	'rgba(153, 102, 255, 0.2)',
+                	'rgba(255, 159, 64, 0.2)'
+            	],
+            	borderColor: [
+                	'rgba(255,99,132,1)',
+                	'rgba(54, 162, 235, 1)',
+                	'rgba(255, 206, 86, 1)',
+                	'rgba(75, 192, 192, 1)',
+                	'rgba(153, 102, 255, 1)',
+                	'rgba(255, 159, 64, 1)'
+            	],
+            	borderWidth: 1
+        	}]
+    	},
+    	options: {
+        	scales: {
+            	yAxes: [{
+                	ticks: {
+                    	beginAtZero:true
+                	}
+            	}]
+        	}
+    	}
+	});
+
 @Component({
   templateUrl: 'build/pages/graph-page/graph-page.html',
   directives: [CHART_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
+
 export class GraphPage {
+	
 
-	lineChartData = [
-		{
-			background: "#d8dee7",
-			type: 'line',
-			data: [10,20,30,40,50,60,10,20,30,40,50],
-			fill: false
-		}
-	];
-	lineChartOptions = {
-		animation: false,
-		responsive: true,
-
-		legend: {
-			display: false
-		},
-		scales: {
-			xAxes: [{
-				ticks: {
-					stepSize: 0.5,
-					fontSize: 0,
-					min: 0,
-					max: 20,
-					beginAtZero: true
-				},
-				gridLines: {
-					display: false,
-					color:"rgba(255,255,255,1.0)",
-					zeroLineColor: "rgba(255,255,255,1.0)",
-				}
-			}],
-			yAxes:[{
-				ticks: {
-					fontSize: 0,
-					beginAtZero: true
-				},
-				gridLines: {
-					display: false,
-					color:"rgba(255,255,255,1.0)",
-					zeroLineColor: "rgba(255,255,255,1.0)",
-				}
-			}]
-		}
-	};
-	lineChartColours = [
-		{ 
-			borderColor: '#4ea0e1'
-		}
-	];
-	lineChartLegend = false;
-	lineChartType = 'line';
-
-	constructor ( ) {
+	constructor () {
 
 	}
+	// eve
+	chartClicked(e) {
+		console.log(e);
+	}
 
-  // events
-  chartClicked(e) {
-    console.log(e);
-  }
-
-  chartHovered(e) {
-    console.log(e);
-  }
+	chartHovered(e) {
+		console.log(e);
+	}
 }
