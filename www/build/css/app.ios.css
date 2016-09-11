@@ -8900,5 +8900,69 @@ ion-content {
 ion-navbar {
   background-color: #6d85a0; }
 
-.voter {
-  width: 40%; }
+.vote-button-container {
+  text-align: center;
+  margin: 9px 9px 9px 9px; }
+  .vote-button-container .voter {
+    width: 48%; }
+
+.chart-header {
+  display: inline-block; }
+
+.result {
+  float: left;
+  font-size: 6vw;
+  color: #b3b4b6; }
+
+.matchup {
+  font-weight: bold;
+  font-size: 3vw; }
+
+.game {
+  text-align: center;
+  padding-left: 5em;
+  font-size: 2.5vw; }
+
+.gen-info {
+  margin: 12px 12px; }
+
+.votes {
+  float: right;
+  font-size: 6vw;
+  color: #4ea0e1; }
+
+.approval {
+  font-size: x-small;
+  margin-left: -2px; }
+
+.game-status {
+  display: inline-block; }
+  .game-status span {
+    display: block; }
+
+.group {
+  display: inline-block;
+  float: right;
+  margin-top: 2em; }
+
+.info {
+  color: #ffffff;
+  font-size: x-large;
+  font-weight: bold; }
+
+.in-game {
+  color: #87fa70; }
+
+ion-card {
+  border-radius: 25px; }
+  ion-card ion-card-header {
+    padding: 10px; }
+
+.chart {
+  display: block;
+  width: 100%;
+  height: 20em;
+  background: "#d8dee7"; }
+
+canvas {
+  height: 100% !important; }

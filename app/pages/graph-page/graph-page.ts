@@ -4,44 +4,6 @@ import { AlertController, App, ItemSliding, List, ModalController, NavController
 import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass } from "@angular/common";
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 
-var ctx = document.getElementById("myChart");
-	var myChart = new Chart(ctx, {
-    	type: 'bar',
-    	data: {
-        	labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        	datasets: [{
-            	label: '# of Votes',
-            	data: [12, 19, 3, 5, 2, 3],
-            	backgroundColor: [
-                	'rgba(255, 99, 132, 0.2)',
-                	'rgba(54, 162, 235, 0.2)',
-                	'rgba(255, 206, 86, 0.2)',
-                	'rgba(75, 192, 192, 0.2)',
-                	'rgba(153, 102, 255, 0.2)',
-                	'rgba(255, 159, 64, 0.2)'
-            	],
-            	borderColor: [
-                	'rgba(255,99,132,1)',
-                	'rgba(54, 162, 235, 1)',
-                	'rgba(255, 206, 86, 1)',
-                	'rgba(75, 192, 192, 1)',
-                	'rgba(153, 102, 255, 1)',
-                	'rgba(255, 159, 64, 1)'
-            	],
-            	borderWidth: 1
-        	}]
-    	},
-    	options: {
-        	scales: {
-            	yAxes: [{
-                	ticks: {
-                    	beginAtZero:true
-                	}
-            	}]
-        	}
-    	}
-	});
-
 @Component({
   templateUrl: 'build/pages/graph-page/graph-page.html',
   directives: [CHART_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES]
@@ -49,6 +11,49 @@ var ctx = document.getElementById("myChart");
 
 export class GraphPage {
 	
+    dataList = [1, 0, 1, 1, 1, 0]
+    averageList = [1, .5, .66, .75, .8, .66];
+    public lineChartData = [
+        {
+            data: this.averageList,
+            borderWidth: '1px', 
+            fill: false
+        }
+    ];
+    public lineChartLabels = ['', '', '', '', '', '', ''];
+    public lineChartOptions = {
+        animation: false,
+        responsive: true,
+        legend: {
+            display: false
+        },
+        scales: {
+            display: false,
+            yAxes: [{
+                display: false,
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    display: false
+                }
+            }]
+        }
+    };
+    public lineChartColors = [
+        { // grey
+            backgroundColor: 'rgba(148,159,177,0.2)',
+            borderColor: 'rgba(148,159,177,1)',
+            pointBackgroundColor: 'rgba(148,159,177,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+        }
+    ];
+    public lineChartLegend = false;
+    public lineChartType = 'line';
 
 	constructor () {
 
@@ -61,4 +66,31 @@ export class GraphPage {
 	chartHovered(e) {
 		console.log(e);
 	}
+
+    vote( v ){
+        if(v == 'b'){
+            this.dataList.push(0);
+            this.calcAverage();
+        }
+        else {
+            this.dataList.push(1);
+            this.calcAverage();
+        }
+    }
+
+    calcAverage() {
+        var count = 0;
+        this.dataList.forEach( function ( num ) {
+            count += num;
+        })
+        var aveNum = count/this.dataList.length;
+        this.averageList.push( aveNum );
+
+        this.lineChartData = [{ data: this.averageList, borderWidth: '1px', fill: false }];
+        var blankList = [];
+        this.averageList.forEach( function ( dummy ) {
+            blankList.push("");
+        })
+        this.lineChartLabels = blankList;
+    }
 }

@@ -10,12 +10,51 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <div class='gen-info'>
+    <div class='game-status'>
+      <span class='info in-game'>
+        1st Quarter
+      </span>
+      <span class='info'>
+        21-0
+      </span>
+    </div>
+    <div class='group'>
+      <span class='info'>Nate</span>
+    </div>
+  </div>
+  <div>
+    <ion-card>
+      <ion-card-header>
+        <div class='chart-header result'>{{averageList[averageList.length-1] | number:'1.0-1' }}% <span class='approval'>approval</span></div>
+        <div class='chart-header game'>
+          <div class='matchup'>BYU v. Utah</div>
+          <div>12/26/2015</div>
+        </div>
+        <div class='chart-header votes'>{{dataList.length}} <span class='approval'>votes</span></div>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="row">
+          <div class="col-md-6">
+            <base-chart class="chart"
+                        [datasets]="lineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="lineChartColors"
+                        [chartType]="lineChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></base-chart>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
   <div class='vote-button-container'>
-    <button class='voter'>
+    <button (click)='vote("c")' class='voter'>
       <span>Cheer</span>
     </button>
       
-    <button class='voter' dark>
+    <button (click)='vote("b")' class='voter' dark>
       <span>Boo</span>
     </button>
   </div>

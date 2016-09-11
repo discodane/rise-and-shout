@@ -45,12 +45,89 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var common_1 = require("@angular/common");
+var ng2_charts_1 = require('ng2-charts/ng2-charts');
 var GraphPage = (function () {
     function GraphPage() {
+        this.dataList = [1, 0, 1, 1, 1, 0];
+        this.averageList = [1, .5, .66, .75, .8, .66];
+        this.lineChartData = [
+            {
+                data: this.averageList,
+                borderWidth: '1px',
+                fill: false
+            }
+        ];
+        this.lineChartLabels = ['', '', '', '', '', '', ''];
+        this.lineChartOptions = {
+            animation: false,
+            responsive: true,
+            legend: {
+                display: false
+            },
+            scales: {
+                display: false,
+                yAxes: [{
+                        display: false,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                xAxes: [{
+                        ticks: {
+                            display: false
+                        }
+                    }]
+            }
+        };
+        this.lineChartColors = [
+            {
+                backgroundColor: 'rgba(148,159,177,0.2)',
+                borderColor: 'rgba(148,159,177,1)',
+                pointBackgroundColor: 'rgba(148,159,177,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+            }
+        ];
+        this.lineChartLegend = false;
+        this.lineChartType = 'line';
     }
+    // eve
+    GraphPage.prototype.chartClicked = function (e) {
+        console.log(e);
+    };
+    GraphPage.prototype.chartHovered = function (e) {
+        console.log(e);
+    };
+    GraphPage.prototype.vote = function (v) {
+        if (v == 'b') {
+            this.dataList.push(0);
+            this.calcAverage();
+        }
+        else {
+            this.dataList.push(1);
+            this.calcAverage();
+        }
+    };
+    GraphPage.prototype.calcAverage = function () {
+        var count = 0;
+        this.dataList.forEach(function (num) {
+            count += num;
+        });
+        var aveNum = count / this.dataList.length;
+        this.averageList.push(aveNum);
+        this.lineChartData = [{ data: this.averageList, borderWidth: '1px', fill: false }];
+        var blankList = [];
+        this.averageList.forEach(function (dummy) {
+            blankList.push("");
+        });
+        this.lineChartLabels = blankList;
+    };
     GraphPage = __decorate([
         core_1.Component({
-            templateUrl: 'build/pages/graph-page/graph-page.html'
+            templateUrl: 'build/pages/graph-page/graph-page.html',
+            directives: [ng2_charts_1.CHART_DIRECTIVES, common_1.NgClass, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
     ], GraphPage);
@@ -58,7 +135,7 @@ var GraphPage = (function () {
 }());
 exports.GraphPage = GraphPage;
 
-},{"@angular/core":151}],3:[function(require,module,exports){
+},{"@angular/common":4,"@angular/core":151,"ng2-charts/ng2-charts":573}],3:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1172,7 +1249,7 @@ var EventEmitter = (function (_super) {
 }(Subject_1.Subject));
 exports.EventEmitter = EventEmitter;
 
-},{"./lang":21,"./promise":22,"rxjs/Observable":572,"rxjs/Subject":574,"rxjs/observable/PromiseObservable":578,"rxjs/operator/toPromise":579}],16:[function(require,module,exports){
+},{"./lang":21,"./promise":22,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],16:[function(require,module,exports){
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -10718,7 +10795,7 @@ var SimpleExpressionChecker = (function () {
 
 },{"../chars":77,"../facade/collection":89,"../facade/exceptions":91,"../facade/lang":92,"../interpolation_config":106,"./ast":84,"./lexer":85,"@angular/core":151}],87:[function(require,module,exports){
 arguments[4][15][0].apply(exports,arguments)
-},{"./lang":92,"./promise":94,"dup":15,"rxjs/Observable":572,"rxjs/Subject":574,"rxjs/observable/PromiseObservable":578,"rxjs/operator/toPromise":579}],88:[function(require,module,exports){
+},{"./lang":92,"./promise":94,"dup":15,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],88:[function(require,module,exports){
 arguments[4][16][0].apply(exports,arguments)
 },{"dup":16}],89:[function(require,module,exports){
 arguments[4][17][0].apply(exports,arguments)
@@ -29857,7 +29934,7 @@ function _createDependency(token /** TODO #9100 */, optional /** TODO #9100 */, 
 
 },{"../facade/collection":192,"../facade/lang":195,"../reflection/reflection":227,"./forward_ref":180,"./metadata":182,"./provider":184,"./provider_util":185,"./reflective_exceptions":186,"./reflective_key":188}],190:[function(require,module,exports){
 arguments[4][15][0].apply(exports,arguments)
-},{"./lang":195,"./promise":197,"dup":15,"rxjs/Observable":572,"rxjs/Subject":574,"rxjs/observable/PromiseObservable":578,"rxjs/operator/toPromise":579}],191:[function(require,module,exports){
+},{"./lang":195,"./promise":197,"dup":15,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],191:[function(require,module,exports){
 arguments[4][16][0].apply(exports,arguments)
 },{"dup":16}],192:[function(require,module,exports){
 arguments[4][17][0].apply(exports,arguments)
@@ -39184,7 +39261,7 @@ exports.PatternValidator = PatternValidator;
 
 },{"../facade/lang":270,"../validators":276,"@angular/core":151}],265:[function(require,module,exports){
 arguments[4][15][0].apply(exports,arguments)
-},{"./lang":270,"./promise":271,"dup":15,"rxjs/Observable":572,"rxjs/Subject":574,"rxjs/observable/PromiseObservable":578,"rxjs/operator/toPromise":579}],266:[function(require,module,exports){
+},{"./lang":270,"./promise":271,"dup":15,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],266:[function(require,module,exports){
 arguments[4][16][0].apply(exports,arguments)
 },{"dup":16}],267:[function(require,module,exports){
 arguments[4][17][0].apply(exports,arguments)
@@ -41178,7 +41255,7 @@ var JSONPBackend_ = (function (_super) {
 }(JSONPBackend));
 exports.JSONPBackend_ = JSONPBackend_;
 
-},{"../base_response_options":284,"../enums":285,"../facade/exceptions":289,"../facade/lang":290,"../interfaces":294,"../static_response":296,"./browser_jsonp":279,"@angular/core":151,"rxjs/Observable":572}],282:[function(require,module,exports){
+},{"../base_response_options":284,"../enums":285,"../facade/exceptions":289,"../facade/lang":290,"../interfaces":294,"../static_response":296,"./browser_jsonp":279,"@angular/core":151,"rxjs/Observable":574}],282:[function(require,module,exports){
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -41360,7 +41437,7 @@ var XHRBackend = (function () {
 }());
 exports.XHRBackend = XHRBackend;
 
-},{"../base_response_options":284,"../enums":285,"../facade/lang":290,"../headers":291,"../http_utils":293,"../interfaces":294,"../static_response":296,"./browser_xhr":280,"@angular/core":151,"@angular/platform-browser":310,"rxjs/Observable":572}],283:[function(require,module,exports){
+},{"../base_response_options":284,"../enums":285,"../facade/lang":290,"../headers":291,"../http_utils":293,"../interfaces":294,"../static_response":296,"./browser_xhr":280,"@angular/core":151,"@angular/platform-browser":310,"rxjs/Observable":574}],283:[function(require,module,exports){
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -43137,7 +43214,7 @@ exports.bootstrapWorkerApp = bootstrapWorkerApp;
 
 },{"./core_private":298,"./src/facade/async":300,"./src/facade/lang":305,"./src/xhr/xhr_cache":307,"./src/xhr/xhr_impl":308,"@angular/common":4,"@angular/compiler":70,"@angular/core":151,"@angular/platform-browser":310}],300:[function(require,module,exports){
 arguments[4][15][0].apply(exports,arguments)
-},{"./lang":305,"./promise":306,"dup":15,"rxjs/Observable":572,"rxjs/Subject":574,"rxjs/observable/PromiseObservable":578,"rxjs/operator/toPromise":579}],301:[function(require,module,exports){
+},{"./lang":305,"./promise":306,"dup":15,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],301:[function(require,module,exports){
 arguments[4][16][0].apply(exports,arguments)
 },{"dup":16}],302:[function(require,module,exports){
 arguments[4][17][0].apply(exports,arguments)
@@ -45973,7 +46050,7 @@ exports.WebAnimationsPlayer = WebAnimationsPlayer;
 
 },{"../facade/lang":341}],335:[function(require,module,exports){
 arguments[4][15][0].apply(exports,arguments)
-},{"./lang":341,"./promise":342,"dup":15,"rxjs/Observable":572,"rxjs/Subject":574,"rxjs/observable/PromiseObservable":578,"rxjs/operator/toPromise":579}],336:[function(require,module,exports){
+},{"./lang":341,"./promise":342,"dup":15,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],336:[function(require,module,exports){
 arguments[4][16][0].apply(exports,arguments)
 },{"dup":16}],337:[function(require,module,exports){
 /**
@@ -82809,7 +82886,7 @@ var ThreeDeeTouch = (function () {
 }());
 exports.ThreeDeeTouch = ThreeDeeTouch;
 
-},{"./plugin":552,"rxjs/Observable":572}],495:[function(require,module,exports){
+},{"./plugin":552,"rxjs/Observable":574}],495:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -88023,7 +88100,7 @@ var Geolocation = (function () {
 }());
 exports.Geolocation = Geolocation;
 
-},{"./plugin":552,"rxjs/Observable":572}],532:[function(require,module,exports){
+},{"./plugin":552,"rxjs/Observable":574}],532:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -89395,7 +89472,7 @@ var Geocoder = (function () {
 }());
 exports.Geocoder = Geocoder;
 
-},{"./plugin":552,"rxjs/Observable":572}],536:[function(require,module,exports){
+},{"./plugin":552,"rxjs/Observable":574}],536:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -90204,7 +90281,7 @@ var IBeacon = (function () {
 }());
 exports.IBeacon = IBeacon;
 
-},{"./plugin":552,"rxjs/Observable":572}],539:[function(require,module,exports){
+},{"./plugin":552,"rxjs/Observable":574}],539:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -91265,7 +91342,7 @@ var MediaError = (function () {
 }());
 exports.MediaError = MediaError;
 
-},{"./plugin":552,"rxjs/Observable":572}],548:[function(require,module,exports){
+},{"./plugin":552,"rxjs/Observable":574}],548:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -92065,7 +92142,7 @@ function InstanceProperty(target, key, descriptor) {
 }
 exports.InstanceProperty = InstanceProperty;
 
-},{"../util":571,"rxjs/Observable":572}],553:[function(require,module,exports){
+},{"../util":571,"rxjs/Observable":574}],553:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -93734,6 +93811,281 @@ exports.get = get;
 
 },{}],572:[function(require,module,exports){
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
+var BaseChartComponent = (function () {
+    function BaseChartComponent(element) {
+        this.labels = [];
+        this.options = { responsive: true };
+        this.chartClick = new core_1.EventEmitter();
+        this.chartHover = new core_1.EventEmitter();
+        this.initFlag = false;
+        this.element = element;
+    }
+    BaseChartComponent.prototype.ngOnInit = function () {
+        this.ctx = this.element.nativeElement.children[0].getContext('2d');
+        this.cvs = this.element.nativeElement.children[0];
+        this.parent = this.element.nativeElement;
+        this.initFlag = true;
+        if (this.data || this.datasets) {
+            this.refresh();
+        }
+    };
+    BaseChartComponent.prototype.ngOnChanges = function () {
+        if (this.initFlag) {
+            this.refresh();
+        }
+    };
+    BaseChartComponent.prototype.ngOnDestroy = function () {
+        if (this.chart) {
+            this.chart.destroy();
+            this.chart = void 0;
+        }
+    };
+    BaseChartComponent.prototype.getChartBuilder = function (ctx /*, data:Array<any>, options:any*/) {
+        var _this = this;
+        var datasets = void 0;
+        // in case if datasets is not provided, but data is present
+        if (!this.datasets || !this.datasets.length && (this.data && this.data.length)) {
+            if (Array.isArray(this.data[0])) {
+                datasets = this.data.map(function (data, index) {
+                    return { data: data, label: _this.labels[index] || "Label " + index };
+                });
+            }
+            else {
+                datasets = [{ data: this.data, label: "Label 0" }];
+            }
+        }
+        if (this.datasets && this.datasets.length ||
+            (datasets && datasets.length)) {
+            datasets = (this.datasets || datasets)
+                .map(function (elm, index) {
+                var newElm = Object.assign({}, elm);
+                if (_this.colors && _this.colors.length) {
+                    Object.assign(newElm, _this.colors[index]);
+                }
+                else {
+                    Object.assign(newElm, getColors(_this.chartType, index, newElm.data.length));
+                }
+                return newElm;
+            });
+        }
+        if (!datasets) {
+            throw new Error("ng-charts configuration error, \n      data or datasets field are required to render char " + this.chartType);
+        }
+        var options = Object.assign({}, this.options);
+        // hock for onHover and onClick events
+        options.hover = options.hover || {};
+        if (!options.hover.onHover) {
+            options.hover.onHover = function (active) {
+                if (active && !active.length) {
+                    return;
+                }
+                _this.chartHover.emit({ active: active });
+            };
+        }
+        if (!options.onClick) {
+            options.onClick = function (event, active) {
+                _this.chartClick.emit({ event: event, active: active });
+            };
+        }
+        var opts = {
+            type: this.chartType,
+            data: {
+                labels: this.labels,
+                datasets: datasets
+            },
+            options: options
+        };
+        if (typeof Chart === 'undefined') {
+            throw new Error('ng2-charts configuration issue: Embedding Chart.js lib is mandatory');
+        }
+        return new Chart(ctx, opts);
+    };
+    BaseChartComponent.prototype.refresh = function () {
+        var _this = this;
+        if (this.options && this.options.responsive && this.parent.clientHeight === 0) {
+            return setTimeout(function () { return _this.refresh(); }, 50);
+        }
+        // todo: remove this line, it is producing flickering
+        this.ngOnDestroy();
+        this.chart = this.getChartBuilder(this.ctx /*, data, this.options*/);
+    };
+    BaseChartComponent.defaultColors = [
+        [255, 99, 132],
+        [54, 162, 235],
+        [255, 206, 86],
+        [231, 233, 237],
+        [75, 192, 192],
+        [151, 187, 205],
+        [220, 220, 220],
+        [247, 70, 74],
+        [70, 191, 189],
+        [253, 180, 92],
+        [148, 159, 177],
+        [77, 83, 96]
+    ];
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BaseChartComponent.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], BaseChartComponent.prototype, "datasets", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], BaseChartComponent.prototype, "labels", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BaseChartComponent.prototype, "options", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BaseChartComponent.prototype, "chartType", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], BaseChartComponent.prototype, "colors", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BaseChartComponent.prototype, "legend", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], BaseChartComponent.prototype, "chartClick", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], BaseChartComponent.prototype, "chartHover", void 0);
+    BaseChartComponent = __decorate([
+        core_1.Component({
+            selector: 'base-chart',
+            template: "<canvas style=\"width: 100%; height: 100%;\"></canvas>",
+            directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, common_1.NgClass]
+        }), 
+        __metadata('design:paramtypes', [core_1.ElementRef])
+    ], BaseChartComponent);
+    return BaseChartComponent;
+}());
+exports.BaseChartComponent = BaseChartComponent;
+function rgba(colour, alpha) {
+    return 'rgba(' + colour.concat(alpha).join(',') + ')';
+}
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function formatLineColor(colors) {
+    return {
+        backgroundColor: rgba(colors, 0.4),
+        borderColor: rgba(colors, 1),
+        pointBackgroundColor: rgba(colors, 1),
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: rgba(colors, 0.8)
+    };
+}
+function formatBarColor(colors) {
+    return {
+        backgroundColor: rgba(colors, 0.6),
+        borderColor: rgba(colors, 1),
+        hoverBackgroundColor: rgba(colors, 0.8),
+        hoverBorderColor: rgba(colors, 1)
+    };
+}
+function formatPieColors(colors) {
+    return {
+        backgroundColor: colors.map(function (color) { return rgba(color, 0.6); }),
+        borderColor: colors.map(function () { return '#fff'; }),
+        pointBackgroundColor: colors.map(function (color) { return rgba(color, 1); }),
+        pointBorderColor: colors.map(function () { return '#fff'; }),
+        pointHoverBackgroundColor: colors.map(function (color) { return rgba(color, 1); }),
+        pointHoverBorderColor: colors.map(function (color) { return rgba(color, 1); })
+    };
+}
+function formatPolarAreaColors(colors) {
+    return {
+        backgroundColor: colors.map(function (color) { return rgba(color, 0.6); }),
+        borderColor: colors.map(function (color) { return rgba(color, 1); }),
+        hoverBackgroundColor: colors.map(function (color) { return rgba(color, 0.8); }),
+        hoverBorderColor: colors.map(function (color) { return rgba(color, 1); })
+    };
+}
+function getRandomColor() {
+    return [getRandomInt(0, 255), getRandomInt(0, 255), getRandomInt(0, 255)];
+}
+/**
+ * Generate colors for line|bar charts
+ * @param index
+ * @returns {number[]|Color}
+ */
+function generateColor(index) {
+    return BaseChartComponent.defaultColors[index] || getRandomColor();
+}
+/**
+ * Generate colors for pie|doughnut charts
+ * @param count
+ * @returns {Colors}
+ */
+function generateColors(count) {
+    var colorsArr = new Array(count);
+    for (var i = 0; i < count; i++) {
+        colorsArr[i] = BaseChartComponent.defaultColors[i] || getRandomColor();
+    }
+    return colorsArr;
+}
+/**
+ * Generate colors by chart type
+ * @param chartType
+ * @param index
+ * @param count
+ * @returns {Color}
+ */
+function getColors(chartType, index, count) {
+    if (chartType === 'pie' || chartType === 'doughnut') {
+        return formatPieColors(generateColors(count));
+    }
+    if (chartType === 'polarArea') {
+        return formatPolarAreaColors(generateColors(count));
+    }
+    if (chartType === 'line' || chartType === 'radar') {
+        return formatLineColor(generateColor(index));
+    }
+    if (chartType === 'bar') {
+        return formatBarColor(generateColor(index));
+    }
+    return generateColor(index);
+}
+exports.CHART_DIRECTIVES = [BaseChartComponent];
+
+},{"@angular/common":4,"@angular/core":151}],573:[function(require,module,exports){
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+var charts_1 = require('./components/charts/charts');
+__export(require('./components/charts/charts'));
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    directives: [
+        charts_1.CHART_DIRECTIVES
+    ]
+};
+
+},{"./components/charts/charts":572}],574:[function(require,module,exports){
+"use strict";
 var root_1 = require('./util/root');
 var observable_1 = require('./symbol/observable');
 var toSubscriber_1 = require('./util/toSubscriber');
@@ -93868,7 +94220,7 @@ var Observable = (function () {
 }());
 exports.Observable = Observable;
 
-},{"./symbol/observable":580,"./util/root":588,"./util/toSubscriber":590}],573:[function(require,module,exports){
+},{"./symbol/observable":582,"./util/root":590,"./util/toSubscriber":592}],575:[function(require,module,exports){
 "use strict";
 exports.empty = {
     isUnsubscribed: true,
@@ -93877,7 +94229,7 @@ exports.empty = {
     complete: function () { }
 };
 
-},{}],574:[function(require,module,exports){
+},{}],576:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94084,7 +94436,7 @@ var SubjectObservable = (function (_super) {
     return SubjectObservable;
 }(Observable_1.Observable));
 
-},{"./Observable":572,"./SubjectSubscription":575,"./Subscriber":576,"./Subscription":577,"./symbol/rxSubscriber":581,"./util/ObjectUnsubscribedError":582,"./util/throwError":589}],575:[function(require,module,exports){
+},{"./Observable":574,"./SubjectSubscription":577,"./Subscriber":578,"./Subscription":579,"./symbol/rxSubscriber":583,"./util/ObjectUnsubscribedError":584,"./util/throwError":591}],577:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94125,7 +94477,7 @@ var SubjectSubscription = (function (_super) {
 }(Subscription_1.Subscription));
 exports.SubjectSubscription = SubjectSubscription;
 
-},{"./Subscription":577}],576:[function(require,module,exports){
+},{"./Subscription":579}],578:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94377,7 +94729,7 @@ var SafeSubscriber = (function (_super) {
     return SafeSubscriber;
 }(Subscriber));
 
-},{"./Observer":573,"./Subscription":577,"./symbol/rxSubscriber":581,"./util/isFunction":586}],577:[function(require,module,exports){
+},{"./Observer":575,"./Subscription":579,"./symbol/rxSubscriber":583,"./util/isFunction":588}],579:[function(require,module,exports){
 "use strict";
 var isArray_1 = require('./util/isArray');
 var isObject_1 = require('./util/isObject');
@@ -94528,7 +94880,7 @@ var Subscription = (function () {
 }());
 exports.Subscription = Subscription;
 
-},{"./util/UnsubscriptionError":583,"./util/errorObject":584,"./util/isArray":585,"./util/isFunction":586,"./util/isObject":587,"./util/tryCatch":591}],578:[function(require,module,exports){
+},{"./util/UnsubscriptionError":585,"./util/errorObject":586,"./util/isArray":587,"./util/isFunction":588,"./util/isObject":589,"./util/tryCatch":593}],580:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94634,7 +94986,7 @@ function dispatchError(arg) {
     }
 }
 
-},{"../Observable":572,"../util/root":588}],579:[function(require,module,exports){
+},{"../Observable":574,"../util/root":590}],581:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
 /**
@@ -94663,7 +95015,7 @@ function toPromise(PromiseCtor) {
 }
 exports.toPromise = toPromise;
 
-},{"../util/root":588}],580:[function(require,module,exports){
+},{"../util/root":590}],582:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
 var Symbol = root_1.root.Symbol;
@@ -94685,14 +95037,14 @@ else {
     exports.$$observable = '@@observable';
 }
 
-},{"../util/root":588}],581:[function(require,module,exports){
+},{"../util/root":590}],583:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
 var Symbol = root_1.root.Symbol;
 exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
     Symbol.for('rxSubscriber') : '@@rxSubscriber';
 
-},{"../util/root":588}],582:[function(require,module,exports){
+},{"../util/root":590}],584:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94718,7 +95070,7 @@ var ObjectUnsubscribedError = (function (_super) {
 }(Error));
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
 
-},{}],583:[function(require,module,exports){
+},{}],585:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94741,30 +95093,30 @@ var UnsubscriptionError = (function (_super) {
 }(Error));
 exports.UnsubscriptionError = UnsubscriptionError;
 
-},{}],584:[function(require,module,exports){
+},{}],586:[function(require,module,exports){
 "use strict";
 // typeof any so that it we don't have to cast when comparing a result to the error object
 exports.errorObject = { e: {} };
 
-},{}],585:[function(require,module,exports){
+},{}],587:[function(require,module,exports){
 "use strict";
 exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
 
-},{}],586:[function(require,module,exports){
+},{}],588:[function(require,module,exports){
 "use strict";
 function isFunction(x) {
     return typeof x === 'function';
 }
 exports.isFunction = isFunction;
 
-},{}],587:[function(require,module,exports){
+},{}],589:[function(require,module,exports){
 "use strict";
 function isObject(x) {
     return x != null && typeof x === 'object';
 }
 exports.isObject = isObject;
 
-},{}],588:[function(require,module,exports){
+},{}],590:[function(require,module,exports){
 (function (global){
 "use strict";
 var objectTypes = {
@@ -94786,12 +95138,12 @@ if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === fre
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],589:[function(require,module,exports){
+},{}],591:[function(require,module,exports){
 "use strict";
 function throwError(e) { throw e; }
 exports.throwError = throwError;
 
-},{}],590:[function(require,module,exports){
+},{}],592:[function(require,module,exports){
 "use strict";
 var Subscriber_1 = require('../Subscriber');
 var rxSubscriber_1 = require('../symbol/rxSubscriber');
@@ -94808,7 +95160,7 @@ function toSubscriber(nextOrObserver, error, complete) {
 }
 exports.toSubscriber = toSubscriber;
 
-},{"../Subscriber":576,"../symbol/rxSubscriber":581}],591:[function(require,module,exports){
+},{"../Subscriber":578,"../symbol/rxSubscriber":583}],593:[function(require,module,exports){
 "use strict";
 var errorObject_1 = require('./errorObject');
 var tryCatchTarget;
@@ -94828,9 +95180,9 @@ function tryCatch(fn) {
 exports.tryCatch = tryCatch;
 ;
 
-},{"./errorObject":584}],592:[function(require,module,exports){
+},{"./errorObject":586}],594:[function(require,module,exports){
 
-},{}]},{},[1,592])
+},{}]},{},[1,594])
 
 
 //# sourceMappingURL=app.bundle.js.map
