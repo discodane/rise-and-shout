@@ -30,12 +30,21 @@ export class GraphPage {
         scales: {
             display: false,
             yAxes: [{
+                gridLines: {
+                    display: false,
+                    lineWidth: .5
+                },
                 display: false,
                 ticks: {
                     beginAtZero: true
                 }
             }],
             xAxes: [{
+                gridLines: {
+                    display: false,
+                    lineWidth: .5
+                },
+                display: false,
                 ticks: {
                     display: false
                 }
